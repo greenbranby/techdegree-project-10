@@ -1,164 +1,112 @@
 
 
-//  VARIABLES
+
+
+var rugAPI = "https://randomuser.me/api/?results=12&inc=name,email,location,phone,address,dob,picture&nat=US"
+
+// ------GET THE JSON DATA FROM RANDOM USER GENERATOR
+var member = new XMLHttpRequest();
+member.onreadystatechange = function() {
+ if(member.readyState === 4) {
+        var data = JSON.parse(member.responseText);
+        var txt = "";
+
+        function memberInfo (){
+        var txt =  '<div id="grid">';
+        for (let i = 0; i <data.results.length; i+=1) {
+          txt +=  '<div id="cards">';
+          txt += '<img src="'+ data.results[i].picture.medium + '" class="avatar">';
+          txt +=  '<ul class="card-content">';
+          txt += '<li id="name">' + (data.results[i].name.first.substring(0,1).toUpperCase() + data.results[i].name.first.substring(1)) + "  " +
+                        (data.results[i].name.last.substring(0,1).toUpperCase() + data.results[i].name.last.substring(1)) + '</li>';
+          txt +=   '<li id="email">' + data.results[i].email + '</li>';
+          txt +=   '<li id="city">' + data.results[i].location.city.substring(0,1).toUpperCase() + data.results[i].location.city.substring(1) + '</li>';
+          txt +=  '</ul>';
+          txt += '</div>';
+          }
+          txt += '</div>';
+
+          document.getElementById('directory-container').innerHTML = txt;
+        }
+        memberInfo();
+ }
+};
+member.open('GET',  rugAPI);
+member.send();
+
+function modalMemberInfo() {
+
+}
+
+
+ //VARIABLES
 const user = document.querySelector('.user-search');
 const message = document.querySelector('.user-message');
 const closeBox = document.querySelector('.close2');
-
-const sendModal = document.getElementById('myModal');
-const button = document.getElementById("myBtn");
+const button = document.getElementById("cards");
 const modalMessage = document.querySelector('.modal-message');
+const modal = document.getElementById('myModal');
 
-
-
-// Line Chart
-var ctx = document.getElementById("myLineChart").getContext('2d');
-var myLineChart = new Chart(ctx, {
-        type: 'line',
-        data: {
-            labels: ["0","16-22", "23-29", "30-5", "6-12", "13-19", "20-26", "27-3", "4-10", "11-17", "18-24", "25-31"],
-            datasets: [{
-                label: [],
-                data: [0, 500, 1000, 850,1300, 1700, 1300, 1500, 1000, 1500, 2000, 1500, 2000, 2500],
-                fill: true,
-                backgroundColor: ['rgba(115,119,191, .25)'],
-                borderColor: ['rgba(115,119,191, 1)'],
-                lineTension: 0,
-                pointBackgroundColor: 'white',
-                pointBorderWidth: 2,
-                fill: 'origin',
-                radius: 6,
-                tension: 0,
-              }],
-          },
-          options: {
-            legend: { display: false },
-            scales: {
-                yAxes: [{
-                    ticks: {
-                        beginAtZero:true
-                    }
-                }]
-            }
-          }
-        });
-
-
-      // BAR CHART
-        var ctx = document.getElementById("myChart").getContext('2d');
-        var myChart = new Chart(ctx, {
-        type: 'bar',
-        data: {
-          labels: ["S", "M", "T", "W", "T", "F", "S"],
-          datasets: [{
-              label: '# of Votes',
-              data: [50, 75, 150, 100, 200, 180, 75, 250],
-              backgroundColor: [
-                  'rgb(115,119,191)',
-                  'rgb(115,119,191)',
-                  'rgb(115,119,191)',
-                    'rgb(115,119,191)',
-                  'rgb(115,119,191)',
-                  'rgb(115,119,191)',
-                    'rgb(115,119,191)'
-              ],
-
-              borderWidth: 1
-          }]
-        },
-        options: {
-           legend: { display: false },
-          scales: {
-              yAxes: [{
-                  ticks: {
-                      beginAtZero:true
-                  }
-              }]
-          }
-        }
-        });
-
-
-      //DONUT CHART
-  var ctx = document.getElementById("myDoughnutChart");
-      var myDoughnutChart = new Chart(ctx, {
-        type: 'doughnut',
-        data: {
-            labels:  [ "Phones","Tablets","Desktop"],
-            data: [10, 20, 30],
-              datasets:[
-                {"label":"My First Dataset",
-                  data:[15,15,75],
-                  backgroundColor: [
-                      'rgb(116,177,191)',
-                      "rgb(129,201,143)",
-                      'rgb(115,119,191)'
-                    ],
-                    borderColor: [
-                        'rgb(116,177,191)',
-                        "rgb(129,201,143)",
-                        'rgb(115,119,191)'
-                      ],
-                }
-              ]
-              },
-        options:  {
-          legend: {
-            display: true,
-            position:'right',
-            labels: {
-                boxWidth: 25,
-                padding: 20,
-              }
-                          }
-                        }
-          });
 
 
 /*-------------ALERT MODAL POP-UP --------*/
-// Get the modal
-var modal = document.getElementById('myModal');
+//Get the modal
+// var modal = document.getElementById('myModal');
+//
+// var modalContent = document.getElementById('modal-content');
+//
+// // Get the button that opens the modal
+// var btn = document.getElementById("myBtn");
+//
+// // Get the <span> element that closes the modal
+// var span = document.getElementsByClassName("close")[0];
+//
+// // // When the user loads the page, open the modal
+// window.onload = function(event) {
+//     if(event.target == modalContent) {
+//       modalContent.style.display = "block";
+//     }
+// }
+//
+// // When the user clicks on <span> (x), close the modal
+// span.onclick = function() {
+//     modalContent.style.display = "none";
+// }
+//
+// // When the user clicks anywhere outside of the modal, close it
+// window.onclick = function(event) {
+//     if (event.target == modalContent) {
+//         modalContent.style.display = "none";
+//     }
+// }
 
-var modalContent = document.getElementById('modal-content');
-
-// Get the button that opens the modal
-var btn = document.getElementById("myBtn");
-
-// Get the <span> element that closes the modal
-var span = document.getElementsByClassName("close")[0];
-
-// // When the user loads the page, open the modal
-window.onload = function(event) {
-    if(event.target == modalContent) {
-      modalContent.style.display = "block";
-    }
-}
-
-// When the user clicks on <span> (x), close the modal
-span.onclick = function() {
-    modalContent.style.display = "none";
-}
-
-// When the user clicks anywhere outside of the modal, close it
-window.onclick = function(event) {
-    if (event.target == modalContent) {
-        modalContent.style.display = "none";
-    }
-}
-
+var wrapper = document.getElementById('directory-container');
 
 /*------------SEND BUTTON MODAL POP-UP --------*/
-// When the user clicks the button, open the modal
-button.onclick = function() {
-    event.preventDefault();
-  if (user.value.length === 0 || message.value.length === 0)  {
-    modalMessage.innerHTML = "Please fill out required fields!";
-    sendModal.style.display = "block";
-  }  else  {
-    modalMessage.innerHTML = "Your message has been sent!";
-    sendModal.style.display = "block";
-  }
-}
+// When the user clicks the members card, open the modal
+$(document).ready(function(e){
+$(wrapper).on('click', ".card-content", function(event){
+  modal.style.display = "block";
+
+  // var txt =  '<div id="grid">';
+  // for (let i = 0; i <data.results.length; i+=1) {
+  //   txt +=  '<div id="cards">';
+  //   txt += '<img src="'+ data.results[i].picture.medium + '" class="avatar">';
+  //   txt +=  '<ul class="card-content">';
+  //   txt += '<li id="name">' + (data.results[i].name.first.substring(0,1).toUpperCase() + data.results[i].name.first.substring(1)) + "  " +
+  //                 (data.results[i].name.last.substring(0,1).toUpperCase() + data.results[i].name.last.substring(1)) + '</li>';
+  //   txt +=   '<li id="email">' + data.results[i].email + '</li>';
+  //   txt +=   '<li id="city">' + data.results[i].location.city.substring(0,1).toUpperCase() + data.results[i].location.city.substring(1) + '</li>';
+  //   txt +=  '</ul>';
+  //   txt += '</div>';
+  //   }
+  //   txt += '</div>';
+  //
+  //   document.getElementById('directory-container').innerHTML = txt;
+
+    // alert('clicked');
+});
+});
 
 // When the user clicks on <span> (x), close the modal
 closeBox.addEventListener('click',  function() {
@@ -168,6 +116,6 @@ closeBox.addEventListener('click',  function() {
 // When the user clicks anywhere outside of the modal, close it
 window.onclick = function(event) {
     if (event.target == modal) {
-        modal.style.display = "none";
+        sendModal.style.display = "none";
     }
 }
