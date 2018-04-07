@@ -10,21 +10,28 @@ body {
   font-weight: 300;
   font-size: 1em;
   color: #676767;
-  background-color: #ffffff;
+    background-color: #f8f8f8;
 }
 
-.dashboard{
-  width: 100%;
-  background-color: #f8f8f8;
+#wrapper {
+  max-width: 1450px;
   margin: 0 auto;
-  height: 100%;
 }
 
 header {
-  margin-left: 20px;
+  display: flex;
+  justify-content: center;
+  flex-flow: column wrap;
+  text-align: center;
   margin-top:  20px;
-  letter-spacing: 2px;
+  letter-spacing: 1px;
 }
+
+header h1 {
+  font-weight: 400;
+  font-size: 1.25em;
+}
+
 p {
   line-height: 1.5em;
   text-align: left;
@@ -38,15 +45,8 @@ a {
 
 ul  {
   list-style-type: none;
-  display: flex;
 }
 
-h1 {
-  font-weight: 400;
-  margin-top: 20px;
-  margin-left: 20px;
-  font-size: 1.25em;
-}
 
 h2 {
   font-weight: 300;
@@ -67,94 +67,42 @@ h2 {
   }
 
 
-/*-------------MODAL POP-UP STYLES ---------*/
+  /*-------------LAYOUT  STYLES ---------*/
 
-/* #modal-content {
-  display:inline-block;
-  font-weight: 300;
-  background-color: #fff;
-  border-radius: 6px;
-  color: #676767;
-  margin: 30px 30px;
-  padding:  5px 20px;
-  height: 200px;
-  width: 400px;
-  border: 1px solid #c8c8c8;
-} */
-
-/* The Modal (background) */
-.modal {
-    display: none;
-    position: fixed;
-    z-index: 1;
-    padding-top: 100px;
-    left:0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgb(0,0,0);
-    background-color: rgba(0,0,0,0.4);
+.container {
+  display: flex;
+  flex-direction: column;
+  /* justify-content: center; */
 }
 
-/* Modal Content */
-.modal-message {
-    display:block;
-    position: fixed;
-    left: 20%;
-    background-color: #fff;
-    height: 500px;
-    width: 700px;
-    padding: 20px;
-    margin: 100px;
-    font-weight: 400;
-    color: #676767;
-    border-radius: 6px;
+#directory-container {
+  width: 100%;
+  padding: 0 20px 20px;
 }
 
-/* The Close Button */
-.close {
-    color: #fff;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-    margin-right: 5px;
-    margin-top: 5px;
+#grid {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
 }
 
-.close2{
-  color: #000;
-  float: right;
-  font-size: 28px;
-  font-weight: bold;
-  margin-right: 200px;
-  margin-top: 95px;
-}
-
-.close:hover,
-.close:focus,
-.close2:hover,
-.close:focus {
-    color: #FF0072;
-    text-decoration: none;
-    cursor: pointer;
-}
-
-/*-------------LAYOUT  STYLES ---------*/
-#cards {
+.cards {
+  display: flex;
+  flex-flow: column wrap;
+  align-items: center;
+  text-align: center;
   border: 1px solid #c8c8c8;
   border-radius: 6px;
-  height: 100%;
   background-color: #fff;
   margin: 15px;
-  padding: 35px 0;
-  width: 400px;
+  padding: 20px 0;
+  flex: 1 100%;
 }
 
-#cards:hover {
+.cards:hover {
   background-color: #f8f8f8;
   border: 1px solid  #FF0072;
-   transition:0.5s all ease;
+  transition:0.5s all ease;
   cursor: pointer;
   box-shadow: 0 2px 10px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.1);
 }
@@ -171,56 +119,139 @@ h2 {
   padding-bottom: 10px;
 }
 
-.clearfix::after {
-    content: "";
-    clear: both;
-    display: table;
-}
-
-#directory-container {
-  width: 100%;
-  padding: 0 20px 20px;
-}
-
-.card-content {
+.employee-info {
   display:flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-  margin-left: 15px;
-  margin-top: 15px;
+  flex-flow: column wrap;
+  margin-top: 30px;
+  padding-top: 20px;
+  border-top: 1px solid #d8d8d8;
+  width: 300px;
 }
 
-.card-content:hover {
-  color: #FF0072;
-}
-
-/*-------------MEDIA QUERIES---------*/
-
-@media (min-width: 1024px){
-.container {
-display: flex;
-flex-direction: row;
-flex-wrap: wrap;
-}
-
-.container > * {
-    flex: 1 100%;
-  }
-
-
-#grid {
-  display: flex;
-  flex-flow: row wrap;
-  justify-content: space-between;
-}
-
-#cards {
-    flex: 1 auto;
-    margin: 20px;
-  }
-
-#city{
+#city,
+#phone,
+#address,
+#birthday{
     font-weight: 300;
     font-size: .85em;
   }
+
+#phone,
+#address,
+#birthday {
+  text-align: center;
+  padding-top: 10px;
+}
+
+  .clearfix::after {
+      content: "";
+      clear: both;
+      display: table;
+  }
+
+  .card-content {
+    display:flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    margin-top: 15px;
+  }
+
+  .card-content:hover {
+    color: #FF0072;
+  }
+
+
+/*-------------MODAL POP-UP STYLES ---------*/
+#myModal {
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: center;
+}
+.modal-card-content {
+  margin-top: 15px;
+}
+
+/* Modal Content */
+#modal__contents {
+  display:flex;
+  flex-flow: column wrap;
+  align-items: center;
+  text-align: center;
+  position: fixed;
+  left: 15%;
+  background-color: #fff;
+  border-radius: 6px;
+  color: #676767;
+  margin: 30px 30px;
+  padding:  20px 20px;
+  border: 1px solid #c8c8c8;
+}
+
+/* The Modal (background) */
+.modal {
+    position: fixed;
+    z-index: 1;
+    padding-top: 100px;
+    left:0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.4);
+}
+
+
+
+
+/* The Close Button */
+
+.close{
+  color: #000;
+  position: relative;
+  float: right;
+  z-index: 1;
+  top: 0;
+ left: 130px;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: #FF0072;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+
+/*-------------MEDIA QUERIES---------*/
+@media (min-width: 768px) {
+header {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.cards {
+  flex-flow: row wrap;
+  text-align: left;
+  flex: 1 45%;
+}
+
+#modal__contents {
+    left: 20%;
+  }
+
+@media (min-width: 1024px){
+  header {
+    justify-content: flex-start;
+    margin-left: 5%;
+  }
+
+.cards {
+ flex: 1 31%;
+}
+
+#modal__contents {
+  left: 35%;
 }
