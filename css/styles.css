@@ -200,9 +200,6 @@ h2 {
     background-color: rgba(0,0,0,0.4);
 }
 
-
-
-
 /* The Close Button */
 
 .close{
@@ -221,6 +218,34 @@ h2 {
     color: #FF0072;
     text-decoration: none;
     cursor: pointer;
+}
+
+/* The Arrows */
+
+.arrow-right {
+  position: relative;
+    left: 50%;
+    top: 15px;
+    transform: rotate(225deg);
+    /* -webkit-transform: rotate(-45deg); */
+}
+
+.arrow-left {
+  position: relative;
+    left: 45%;
+    transform: rotate(45deg);
+    /* -webkit-transform: rotate(135deg); */
+}
+
+.arrow-right,
+.arrow-left {
+  display: inline-block;
+  width: 15px;
+  height: 15px;
+  transition: .5s;
+  float: left;
+  box-shadow: -2px 2px 0 #ff0072;
+  cursor: pointer;
 }
 
 
