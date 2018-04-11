@@ -232,9 +232,9 @@ h2 {
 
 .arrow-left {
   position: relative;
-    left: 45%;
-    transform: rotate(45deg);
-    /* -webkit-transform: rotate(135deg); */
+  left: 45%;
+  transform: rotate(45deg);
+  /* -webkit-transform: rotate(135deg); */
 }
 
 .arrow-right,
