@@ -88,6 +88,7 @@ $.getJSON(rugAPI,  function(data) {
 
     $(document).on('click ',  '.cards', function(e) {
         var i = $('.cards').index(this);
+        console.log(i);
         //Get the index of the clicked member
         memberModal(employees[i]);
       }); // end Modal Open
