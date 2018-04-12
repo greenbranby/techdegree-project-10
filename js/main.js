@@ -2,6 +2,8 @@ $(document).ready(function () {
 
 //VARIABLES
 const modal = document.getElementById('myModal');
+const search = document.getElementById('search');
+
   let employees= [];
 
 // let selectedIndex = 0;
@@ -15,8 +17,6 @@ const modal = document.getElementById('myModal');
 //    return splitStr.join(' ');
 // }
 //
-
-
 function memberModal(employees){
   $('#myModal').show(); // Open the modal
 
@@ -24,10 +24,10 @@ function memberModal(employees){
       let fullbday = employees.dob;
       fullbday = fullbday.substring(0, fullbday.length-8);
 
-      let txt =  '<div id="myModal">';
-      txt += '<div class="modal">';
-      txt +=  '<div id="modal__contents">';
-      txt += '<span class="close">&times;</span>';
+      let txt =  '<div id="myModal" >';
+      txt += '<div class="modal"  data-index="' + i + '">';
+      txt +=  '<div id="modal__contents"  >';
+      txt += '<span class="close" aria-label="close">&times;</span>';
       txt += '<img src="'+ employees.picture.large + '" class="avatar">';
       txt +=  '<ul class="modal-card-content">';
       txt += '<li id="name">' + (employees.name.first.substring(0,1).toUpperCase() + employees.name.first.substring(1)) + "  " +
@@ -40,17 +40,24 @@ function memberModal(employees){
       txt += '<li id="address"> ' + employees.location.street +" " + employees.location.state + " " + employees.location.postcode + ' </li>'
       txt += '<li id="birthday">' + "Birthday: "  + fullbday  +' </li>'
       txt += '<span class="arrow-right"></span>';
-      txt += '<span class="arrow-left"></span';
+      txt += '<span class="arrow-left" ></span';
       txt +=  '</ul>';
       txt += '</div>';
       $('#myModal').html(txt)
 
       //  When the user clicks on <span> (x), close the modal
-    $('.close').on('click',  function() {
-          // location.reload();
-          $('#myModal').remove();
+    $('.close').on('click',  function(e) {
+          $('#myModal').hide();
     });
 }
+
+// Event Listener for modal window clicks
+$(document).on('click ',  '.arrow-right', function() {
+    var i = $('.arrow-right').index(this);
+
+    memberModal(employees[i + 1]);
+});
+
 
 // ------GET THE JSON names FROM RANDOM USER GENERATOR
 
@@ -64,11 +71,11 @@ $.getJSON(rugAPI,  function(data) {
     var txt =  '<div id="grid">';
     for (let i = 0; i <data.length; i+=1) {
         var fullname = (data[i].name.first.substring(0,1).toUpperCase() + data[i].name.first.substring(1)) + "  " +  (data[i].name.last.substring(0,1).toUpperCase() + data[i].name.last.substring(1));
-        var img = data[i].picture.large;
-        var email =  data[i].email;
-        var city = data[i].location.city.substring(0,1).toUpperCase()  + data[i].location.city.substring(1) ;
-        var phone = data[i].cell;
-        var address =  data[i].location.street + " " + data[i].location.state + " " + data[i].location.postcode;
+        var   img = data[i].picture.large;
+        var   email =  data[i].email;
+        var  city = data[i].location.city.substring(0,1).toUpperCase()  + data[i].location.city.substring(1) ;
+        var  phone = data[i].cell;
+        var   address =  data[i].location.street + " " + data[i].location.state + " " + data[i].location.postcode;
 
         txt +=  '<div class="cards" data-index="' + i + '">';
         txt += '<img src="'+ img + '" class="avatar">';
@@ -81,12 +88,23 @@ $.getJSON(rugAPI,  function(data) {
       }
   $('#directory-container').html(txt)
 
-    /*------------MEMBER  MODAL POP-UP --------*/
+            /*------------MEMBER  MODAL POP-UP --------*/
 
-      $(document).on('click ',  '.cards', function(e) {
-        var i = $('.cards').index(this); // Get the index of the clicked member
-        memberModal(employees[i]);
-    }); // end Modal Open
+        $(document).on('click ',  '.cards', function(e) {
+            var i = $('.cards').index(this);
+            // Get the index of the clicked member
+            memberModal(employees[i]);
+        }); // end Modal Open
+
+        // Search function
+        $("#search").keyup(function(){
+            var value = $(this).val().toUpperCase();
+            $(".cards").filter(function(){
+            ($(this).toggle($(this).text().toUpperCase().indexOf(value) > -1))
+            });
+        }); // End Search Function
+
+
 
   }); // end get JSON
 }); //end ready
