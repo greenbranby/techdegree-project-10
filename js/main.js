@@ -4,42 +4,38 @@ $(document).ready(function () {
 const modal = document.getElementById('myModal');
 const search = document.getElementById('search');
 
-  let employees= [];
+let employees= [];
+let selectedIndex = 0;
 
-// let selectedIndex = 0;
-// function titleCase(str) {
-//    var splitStr = str.toLowerCase().split(' ');
-//    for (var i = 0; i < splitStr.length; i++) {
-//        // Assign it back to the array
-//        splitStr[i] = splitStr[i].charAt(0).toUpperCase() + splitStr[i].substring(1);
-//    }
-//    // Directly return the joined string
-//    return splitStr.join(' ');
-// }
-//
-function memberModal(employees){
-  $('#myModal').show(); // Open the modal
 
-      let i = 0;
-      let fullbday = employees.dob;
+
+function memberModal(i){
+ selectedIndex = employees.indexOf(i);
+
+ // Open the modal
+      // let employee = employees[index];
+      let fullbday = i.dob;
       fullbday = fullbday.substring(0, fullbday.length-8);
 
+      $('#myModal').show();
+
+
       let txt =  '<div id="myModal" >';
-      txt += '<div class="modal"  data-index="' + i + '">';
+      txt += '<div class="modal">';
       txt +=  '<div id="modal__contents"  >';
       txt += '<span class="close" aria-label="close">&times;</span>';
-      txt += '<img src="'+ employees.picture.large + '" class="avatar">';
+      txt += '<img src="'+ i.picture.large + '" class="avatar">';
       txt +=  '<ul class="modal-card-content">';
-      txt += '<li id="name">' + (employees.name.first.substring(0,1).toUpperCase() + employees.name.first.substring(1)) + "  " +
-                    (employees.name.last.substring(0,1).toUpperCase() + employees.name.last.substring(1)) + '</li>';
-      txt +=   '<li id="email">' + employees.email + '</li>';
-      txt +=   '<li id="city">' + employees.location.city.substring(0,1).toUpperCase() + employees.location.city.substring(1) + '</li>';
+      txt += '<li id="name">' + (i.name.first.substring(0,1).toUpperCase() + i.name.first.substring(1)) + "  " +
+                    (i.name.last.substring(0,1).toUpperCase() + i.name.last.substring(1)) + '</li>';
+      txt +=   '<li id="email">' + i.email + '</li>';
+      txt +=   '<li id="city">' + i.location.city.substring(0,1).toUpperCase() + i.location.city.substring(1) + '</li>';
       txt +=  '</ul>';
       txt += '<ul class="employee-info">';
-       txt += '<li id="phone">' + employees.cell + ' </li>'
-      txt += '<li id="address"> ' + employees.location.street +" " + employees.location.state + " " + employees.location.postcode + ' </li>'
+       txt += '<li id="phone">' + i.cell + ' </li>'
+      txt += '<li id="address"> ' + i.location.street +" " + i.location.state + " " + i.location.postcode + ' </li>'
       txt += '<li id="birthday">' + "Birthday: "  + fullbday  +' </li>'
-      txt += '<span class="arrow-right"></span>';
+      txt += '<span class="arrow-right"  data-index="' + i + '" ></span>';
       txt += '<span class="arrow-left" ></span';
       txt +=  '</ul>';
       txt += '</div>';
@@ -51,12 +47,22 @@ function memberModal(employees){
     });
 }
 
-// Event Listener for modal window clicks
-$(document).on('click ',  '.arrow-right', function() {
-    var i = $('.arrow-right').index(this);
 
-    memberModal(employees[i + 1]);
-});
+// Event Listeners for modal window clicks
+$(document).on('click ', '.arrow-left', function(e) {
+if (selectedIndex === 0) {
+          return memberModal(employees[employees.length - 1]);
+      }
+          return memberModal(employees[selectedIndex - 1]);
+      });  // End
+
+    $(document).on('click ', '.arrow-right', function(e) {
+        if (selectedIndex === employees.length - 1) {
+              return memberModal(employees[0]);
+      }
+              return memberModal(employees[selectedIndex + 1]);
+  }); // End
+
 
 
 // ------GET THE JSON names FROM RANDOM USER GENERATOR
@@ -77,6 +83,17 @@ $.getJSON(rugAPI,  function(data) {
         var  phone = data[i].cell;
         var   address =  data[i].location.street + " " + data[i].location.state + " " + data[i].location.postcode;
 
+        /*------------MEMBER  MODAL POP-UP --------*/
+
+    $(document).on('click ',  '.cards', function(e) {
+        var i = $('.cards').index(this);
+        // console.log(indexNumber);
+        //Get the index of the clicked member
+        memberModal(employees[i]);
+
+    }); // end Modal Open
+
+
         txt +=  '<div class="cards" data-index="' + i + '">';
         txt += '<img src="'+ img + '" class="avatar">';
         txt +=  '<ul class="card-content">';
@@ -88,21 +105,18 @@ $.getJSON(rugAPI,  function(data) {
       }
   $('#directory-container').html(txt)
 
-            /*------------MEMBER  MODAL POP-UP --------*/
 
-        $(document).on('click ',  '.cards', function(e) {
-            var i = $('.cards').index(this);
-            // Get the index of the clicked member
-            memberModal(employees[i]);
-        }); // end Modal Open
 
-        // Search function
-        $("#search").keyup(function(){
-            var value = $(this).val().toUpperCase();
-            $(".cards").filter(function(){
-            ($(this).toggle($(this).text().toUpperCase().indexOf(value) > -1))
-            });
-        }); // End Search Function
+
+
+
+  // Search function
+  $("#search").keyup(function(){
+      var value = $(this).val().toUpperCase();
+      $(".cards").filter(function(){
+      ($(this).toggle($(this).text().toUpperCase().indexOf(value) > -1))
+      });
+  }); // End Search Function
 
 
 
