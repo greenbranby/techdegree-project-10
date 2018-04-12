@@ -5,7 +5,7 @@ const modal = document.getElementById('myModal');
 const search = document.getElementById('search');
 
 let employees= [];
-let selectedIndex = 0;
+let clickedCard = 0;
 
 //Capitalize letters
 const titleCase = function (str) {
@@ -18,16 +18,16 @@ const titleCase = function (str) {
 
 
 function memberModal(i){
- selectedIndex = employees.indexOf(i);
+      clickedCard = employees.indexOf(i);
 
       $('#myModal').show();
 
-      let txt =  '<div id="myModal" >';
+      let txt =  '<div id="myModal">';
       txt += '<div class="modal">';
-      txt +=  '<div id="modal__contents"  >';
+      txt +=  '<div id="modal__contents" >';
       txt += '<span class="close" aria-label="close">&times;</span>';
       txt += '<img src="'+ i.picture.large + '" class="avatar">';
-      txt +=  '<ul class="modal-card-content">';
+      txt +=  '<ul class="modal-card-content" data-index="' + i + '">';
       txt += '<li id="name">' + titleCase (i.name.first) + "  " + titleCase(i.name.last);
       txt +=   '<li id="email">' + i.email + '</li>';
       txt +=   '<li id="city">' + i.location.city.substring(0,1).toUpperCase() + i.location.city.substring(1) + '</li>';
@@ -36,7 +36,7 @@ function memberModal(i){
        txt += '<li id="phone">' + i.cell.replace("-", ' '); ' </li>'
       txt += '<li id="address"> ' + titleCase(i.location.street) +" " + titleCase(i.location.state) + " " + i.location.postcode + ' </li>'
       txt += '<li id="birthday">' + "Birthday: "  +  new Date(i.dob).toLocaleDateString()  +' </li>'
-      txt += '<span class="arrow-right"  data-index="' + i + '" >&#8250;</span>';
+      txt += '<span class="arrow-right"  >&#8250;</span>';
       txt += '<span class="arrow-left" >&#8249;</span';
       txt +=  '</ul>';
       txt += '</div>';
@@ -50,18 +50,18 @@ function memberModal(i){
 
 
 // Event Listeners for modal window clicks
-$(document).on('click ', '.arrow-left', function(e) {
-if (selectedIndex === 0) {
+    $(document).on('click ', '.arrow-left', function(e) {
+      if (clickedCard === 0) {
           return memberModal(employees[employees.length - 1]);
       }
-          return memberModal(employees[selectedIndex - 1]);
+          return memberModal(employees[clickedCard - 1]);
       });  // End
 
     $(document).on('click ', '.arrow-right', function(e) {
-        if (selectedIndex === employees.length - 1) {
-              return memberModal(employees[0]);
+        if (clickedCard === employees.length - 1) {
+          return memberModal(employees[0]);
       }
-              return memberModal(employees[selectedIndex + 1]);
+          return memberModal(employees[clickedCard + 1]);
   }); // End
 
 
@@ -88,11 +88,9 @@ $.getJSON(rugAPI,  function(data) {
 
     $(document).on('click ',  '.cards', function(e) {
         var i = $('.cards').index(this);
-        // console.log(indexNumber);
         //Get the index of the clicked member
         memberModal(employees[i]);
-
-    }); // end Modal Open
+      }); // end Modal Open
 
 
         txt +=  '<div class="cards" data-index="' + i + '">';
