@@ -20,16 +20,15 @@ body {
 
 header {
   display: flex;
-  justify-content: center;
-  flex-flow: column wrap;
-  text-align: center;
+  flex-direction: column;
+  align-items: center;
   margin-top:  20px;
-  letter-spacing: 1px;
+  /* letter-spacing: 1px; */
 }
 
-header h1 {
+ h1 {
   font-weight: 400;
-  font-size: 1.25em;
+  font-size: 1.05em;
 }
 
 p {
@@ -72,8 +71,8 @@ h2 {
 .container {
   display: flex;
   flex-direction: column;
-  /* justify-content: center; */
 }
+
 
 #directory-container {
   width: 100%;
@@ -143,22 +142,32 @@ h2 {
   padding-top: 10px;
 }
 
-  .clearfix::after {
-      content: "";
-      clear: both;
-      display: table;
-  }
 
   .card-content {
     display:flex;
     flex-direction: column;
     flex-wrap: wrap;
-    margin-top: 15px;
+    margin-top: 10px;
   }
 
   .card-content:hover {
     color: #FF0072;
   }
+
+/*-------------SEARCH BOX  STYLES ---------*/
+
+header input {
+  background-color: white;
+  font-size: .85em;
+  color: #bababb;
+  width: 90%;
+  border: 1pt solid gray;
+  border-radius: 5px;
+  padding: 0 20px;
+  height: 40px;
+  margin: 10px 0;
+  width: 300px;
+}
 
 
 /*-------------MODAL POP-UP STYLES ---------*/
@@ -232,9 +241,9 @@ h2 {
 
 .arrow-left {
   position: relative;
-    left: 45%;
-    transform: rotate(45deg);
-    /* -webkit-transform: rotate(135deg); */
+  left: 45%;
+  transform: rotate(45deg);
+  /* -webkit-transform: rotate(135deg); */
 }
 
 .arrow-right,
@@ -247,14 +256,30 @@ h2 {
   box-shadow: -2px 2px 0 #ff0072;
   cursor: pointer;
 }
-
+.arrow-right:hover,
+.arrow-left:hover {
+  box-shadow: -2px 2px 0 black;
+}
 
 /*-------------MEDIA QUERIES---------*/
 @media (min-width: 768px) {
 header {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header input {
+    width: 300px;
+    padding: 0 20px;
+    margin: 45px 40px 25px 0;
+}
+
+h1 {
+  font-size: 1.25em;
+  margin-left: 40px;
+  letter-spacing: 1px;
 }
 
 .cards {
@@ -266,17 +291,16 @@ header {
 #modal__contents {
     left: 20%;
   }
+}
 
 @media (min-width: 1024px){
-  header {
-    justify-content: flex-start;
-    margin-left: 5%;
-  }
-
 .cards {
  flex: 1 31%;
+ align-items:flex-start;
 }
 
 #modal__contents {
   left: 35%;
+}
+
 }
