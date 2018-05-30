@@ -254,11 +254,12 @@ header input {
 }
 
 .arrow-left {
-  background-color: #f1f1f1;
+  background-color: #FF0072;
   border-radius: 50%;
   position: relative;
   left: 32%;
   top: -30px;
+  color: white;
   padding-top: 10px;
 }
 
@@ -271,13 +272,10 @@ header input {
   float: left;
   cursor: pointer;
 }
-.arrow-right:hover {
-  background-color: #ddd;
-  color: black;
-}
 
+.arrow-right:hover,
 .arrow-left:hover {
-  background-color: #ff0072;
+  background-color: #ddd;
   color: white;
 }
 
