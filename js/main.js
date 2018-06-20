@@ -33,9 +33,9 @@ function memberModal(i){
       txt +=   '<li id="city">' + i.location.city.substring(0,1).toUpperCase() + i.location.city.substring(1) + '</li>';
       txt +=  '</ul>';
       txt += '<ul class="employee-info">';
-       txt += '<li id="phone">' + i.cell.replace("-", ' '); ' </li>'
-      txt += '<li id="address"> ' + titleCase(i.location.street) +" " + titleCase(i.location.state) + " " + i.location.postcode + ' </li>'
-      txt += '<li id="birthday">' + "Birthday: "  +  new Date(i.dob).toLocaleDateString()  +' </li>'
+      txt += '<li id="phone">' + i.cell.replace("-", ' '); ' </li>'
+      txt += '<li id="address"> ' + titleCase(i.location.street) +", " + titleCase(i.location.state) + " " + i.location.postcode + ' </li>'
+      txt += '<li id="birthday">' + "Birthday: "  +  new Date(i.dob.date).toLocaleDateString()  +' </li>'
       txt += '<span class="arrow-right"  >&#8250;</span>';
       txt += '<span class="arrow-left" >&#8249;</span';
       txt +=  '</ul>';
@@ -71,7 +71,7 @@ var rugAPI = "https://randomuser.me/api/?results=12&nat=US&inc=name,email,locati
 $.getJSON(rugAPI,  function(data) {
     var data = data.results;
     employees = data;
-
+   console.log(employees);
   // ----------Create Member Directory
 
     var txt =  '<div id="grid">';
@@ -94,13 +94,13 @@ $.getJSON(rugAPI,  function(data) {
       }); // end Modal Open
 
 
-        txt +=  '<div class="cards" data-index="' + i + '">';
+        txt += '<div class="cards" data-index="' + i + '">';
         txt += '<img src="'+ img + '" class="avatar">';
-        txt +=  '<ul class="card-content">';
+        txt += '<ul class="card-content">';
         txt += '<li id="name">' + fullname + '</li>';
-        txt +=   '<li id="email">' + email + '</li>';
-        txt +=   '<li id="city">' + city + '</li>';
-        txt +=  '</ul>';
+        txt += '<li id="email">' + email + '</li>';
+        txt += '<li id="city">' + city + '</li>';
+        txt += '</ul>';
         txt += '</div>';
       }
   $('#directory-container').html(txt)
