@@ -187,30 +187,30 @@ header input {
   align-items: center;
   text-align: center;
   position: fixed;
-  left: 17%;
+  /* left: 9%; */
   background-color: #fff;
   border-radius: 6px;
   color: #676767;
-  margin: 0 auto;
+  margin: 0 0 0 45px;
   border: 1px solid #FF0072;
 }
 
 /* The Modal (background) */
 .modal {
-    position: fixed;
-    z-index: 1;
-    padding-top: 100px;
-    left:0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgba(0,0,0,0.4);
+  position: fixed;
+  z-index: 1;
+  padding-top: 100px;
+  left:0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.4);
 }
 .vert-align-help {
-    display:table;
-    height: 100%;
-    width: 100%;
+  display:table;
+  height: 100%;
+  width: 100%;
 }
 .vert-align-center {
     /* To center vertically */
@@ -319,5 +319,6 @@ h1 {
 
 #modal__contents {
   left: 39%;
- }
+}
+
 }
