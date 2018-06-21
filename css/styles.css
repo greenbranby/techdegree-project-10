@@ -187,12 +187,11 @@ header input {
   align-items: center;
   text-align: center;
   position: fixed;
-  left: 5%;
+  left: 17%;
   background-color: #fff;
   border-radius: 6px;
   color: #676767;
-  margin-top: 30px;
-  padding:  20px 20px;
+  margin: 0 auto;
   border: 1px solid #FF0072;
 }
 
@@ -308,7 +307,7 @@ h1 {
 }
 
 #modal__contents {
-    left: 30%;
+    left: 35%;
   }
 }
 
@@ -319,7 +318,6 @@ h1 {
 }
 
 #modal__contents {
-  left: 35%;
-}
-
+  left: 39%;
+ }
 }
