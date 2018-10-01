@@ -175,6 +175,7 @@ header input {
   display: flex;
   flex-flow: column wrap;
   justify-content: center;
+  margin: 0 auto;
 }
 .modal-card-content {
   margin-top: 15px;
@@ -186,12 +187,13 @@ header input {
   flex-flow: column wrap;
   align-items: center;
   text-align: center;
-  position: fixed;
-  /* left: 9%; */
+  position: absolute;
+  top: 20%;
+  left: 5%;
   background-color: #fff;
   border-radius: 6px;
   color: #676767;
-  margin: 0 0 0 45px;
+  padding: 5px 20px;
   border: 1px solid #FF0072;
 }
 
@@ -207,16 +209,16 @@ header input {
   overflow: auto;
   background-color: rgba(0,0,0,0.4);
 }
-.vert-align-help {
+/* .vert-align-help {
   display:table;
   height: 100%;
   width: 100%;
-}
-.vert-align-center {
-    /* To center vertically */
+} */
+/* .vert-align-center {
+
     display: table-cell;
     vertical-align: middle;
-}
+} */
 
 /* The Close Button */
 
@@ -307,7 +309,7 @@ h1 {
 }
 
 #modal__contents {
-    left: 35%;
+    left: 28%;
   }
 }
 

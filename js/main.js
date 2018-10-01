@@ -29,9 +29,9 @@ function memberModal(i){
       txt += '<img src="'+ i.picture.large + '" class="avatar">';
       txt +=  '<ul class="modal-card-content" data-index="' + i + '">';
       txt += '<li id="name">' + titleCase (i.name.first) + "  " + titleCase(i.name.last);
-      txt +=   '<li id="email">' + i.email + '</li>';
-      txt +=   '<li id="city">' + i.location.city.substring(0,1).toUpperCase() + i.location.city.substring(1) + '</li>';
-      txt +=  '</ul>';
+      txt += '<li id="email">' + i.email + '</li>';
+      txt += '<li id="city">' + i.location.city.substring(0,1).toUpperCase() + i.location.city.substring(1) + '</li>';
+      txt += '</ul>';
       txt += '<ul class="employee-info">';
       txt += '<li id="phone">' + i.cell.replace("-", ' '); ' </li>'
       txt += '<li id="address"> ' + titleCase(i.location.street) +", " + titleCase(i.location.state) + " " + i.location.postcode + ' </li>'
@@ -86,7 +86,7 @@ $.getJSON(rugAPI,  function(data) {
 
         /*------------MEMBER  MODAL POP-UP --------*/
 
-    $(document).on('click ',  '.cards', function(e) {
+    $(document).on('click ', '.cards', function(e) {
         var i = $('.cards').index(this);
         console.log(i);
         //Get the index of the clicked member
